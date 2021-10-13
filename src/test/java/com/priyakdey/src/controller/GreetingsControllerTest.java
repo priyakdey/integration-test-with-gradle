@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DisplayName("UNIT - GreetingsControllerTest")
+@DisplayName("UNIT TEST - GreetingsControllerTest")
 @Tag("unit")
 @WebMvcTest(controllers = GreetingsController.class)
 class GreetingsControllerTest {

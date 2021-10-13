@@ -26,5 +26,7 @@ jobs:
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
-      - name: Run Unit and Integration Test cases
+      - name: Run Unit Test cases
         run: ./gradlew test
+      - name: Run Integration Test cases
+        run: ./gradlew integrationTest

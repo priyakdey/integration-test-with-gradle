@@ -21,6 +21,14 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    create("integrationTest") {
+        java.srcDir("src/integrationTest/java")
+        resources.srcDir("src/integrationTest/resources")
+        compileClasspath += sourceSets["main"].output + configurations["testRuntimeClasspath"]
+        runtimeClasspath += output + compileClasspath + sourceSets["test"].runtimeClasspath
+    }
+}
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -32,4 +40,15 @@ tasks.withType<Test> {
     useJUnitPlatform() {
         includeTags("unit")     // Include all test cases which are tagged as "unit"
     }
+}
+
+// Custom task to run the integration test cases~
+task<Test>("integrationTest") {
+    description = "Run the integration test cases"
+    group = "verification"
+    useJUnitPlatform() {
+        includeTags("non-unit")     // Include all test cases which are tagged as "non-unit"
+    }
+    testClassesDirs = sourceSets["integrationTest"].output.classesDirs
+    classpath = sourceSets["integrationTest"].runtimeClasspath
 }
